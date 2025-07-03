@@ -1,0 +1,44 @@
+<%= form_with model: @shop, local: true do |f| %>
+  <% if @shop.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+        <% @shop.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :name %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :address %>
+    <%= f.text_field :address, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :opening_hours %>
+    <%= f.text_field :opening_hours, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :holiday %>
+    <%= f.text_field :holiday, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :rules %>
+    <%= f.text_area :rules, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :image %>
+    <%= f.file_field :image, class: "form-control" %>
+  </div>
+
+  <%= f.submit class: "btn btn-primary mt-3" %>
+<% end %>
+  
