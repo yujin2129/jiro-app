@@ -22,7 +22,7 @@
                 <span class="navbar-text me-2">
                   ログイン中: <%= current_user.name %>
                 </span>
-                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm" %>
+                <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm" %>
               <% else %>
                 <%= render 'devise/shared/links' %>
               <% end %>
