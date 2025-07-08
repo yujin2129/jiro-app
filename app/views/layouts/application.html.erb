@@ -7,10 +7,30 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", type: "module", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">JiroMap</a>
+
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <% if user_signed_in? %>
+                <span class="navbar-text me-2">
+                  ログイン中: <%= current_user.name %>
+                </span>
+                <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-light btn-sm" %>
+              <% else %>
+                <%= render 'devise/shared/links' %>
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
     <%= yield %>
   </body>
 </html>
