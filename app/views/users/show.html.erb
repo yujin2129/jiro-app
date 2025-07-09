@@ -1,0 +1,10 @@
+<div class="card bg-light text-dark">
+  <div class="card-body">
+    <h1 class="card-title fw-bold fs-3">プロフィール</h1>
+
+    <p><strong>名前:</strong> <%= @user.name %></p>
+    <p><strong>メール:</strong> <%= @user.email %></p>
+
+    <%= link_to "プロフィールを編集", edit_user_registration_path, class: "btn btn-warning mt-3" %>
+  </div>
+</div>
