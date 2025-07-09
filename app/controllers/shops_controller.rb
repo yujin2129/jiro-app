@@ -18,7 +18,7 @@ class ShopsController < ApplicationController
     if @shop.save
       redirect_to shops_path, notice: '店舗を登録しました'
     else
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -29,7 +29,7 @@ class ShopsController < ApplicationController
     if @shop.update(shop_params)
       redirect_to @shop, notice: '店舗情報を更新しました。'
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
