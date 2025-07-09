@@ -12,3 +12,33 @@
 
 <%= link_to '編集', edit_shop_path(@shop), class: 'btn btn-warning' %>
 <%= link_to '一覧に戻る', shops_path, class: 'btn btn-secondary' %>
+
+<h2 class="mt-4">レビュー</h2>
+
+<% if user_signed_in? %>
+  <%= form_with model: [@shop, Review.new], local: true do |f| %>
+    <div class="mb-3">
+      <%= f.label :rating, "評価（1〜5）" %>
+      <%= f.number_field :rating, in: 1..5, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+      <%= f.label :content, "レビュー内容" %>
+      <%= f.text_area :content, class: "form-control" %>
+    </div>
+    <%= f.submit "投稿", class: "btn btn-primary" %>
+  <% end %>
+<% else %>
+  <p>レビュー投稿にはログインが必要です。</p>
+<% end %>
+
+<hr>
+
+<% @shop.reviews.each do |review| %>
+  <div class="border rounded p-2 mb-2">
+    <strong><%= review.user.name %></strong>（評価: <%= review.rating %>）  
+    <p><%= review.content %></p>
+    <% if review.user == current_user %>
+      <%= button_to "削除", shop_review_path(@shop, review), method: :delete, data: { confirm: "削除しますか？" }, class: "btn btn-sm btn-outline-danger" %>
+    <% end %>
+  </div>
+<% end %>
