@@ -4,13 +4,19 @@ class FavoritesController < ApplicationController
 
   def create
     @shop.favorites.create(user: current_user)
-    redirect_to shop_path(@shop), notice: "お気に入りに追加しました"
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to shop_path(@shop), notice: "お気に入り追加" }
+    end
   end
 
   def destroy
     favorite = @shop.favorites.find_by(user: current_user)
     favorite.destroy if favorite
-    redirect_to shop_path(@shop), notice: "お気に入りを解除しました"
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to shop_path(@shop), notice: "お気に入り解除" }
+    end
   end
 
   private

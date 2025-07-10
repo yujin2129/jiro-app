@@ -1,0 +1,3 @@
+<%= form_with url: shop_favorite_path(shop), method: current_user.favorite_shops.include?(shop) ? :delete : :post, data: { turbo_frame: "_top" } do %>
+  <%= submit_tag(current_user.favorite_shops.include?(shop) ? "お気に入り解除" : "お気に入り追加", class: "btn btn-outline-primary") %>
+<% end %>
