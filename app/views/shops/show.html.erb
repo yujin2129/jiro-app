@@ -10,6 +10,14 @@
   </div>
 <% end %>
 
+<% if user_signed_in? %>
+  <% if current_user.favorite_shops.include?(@shop) %>
+    <%= button_to "お気に入り解除", shop_favorite_path(@shop), method: :delete, class: "btn btn-outline-danger" %>
+  <% else %>
+    <%= button_to "お気に入り追加", shop_favorite_path(@shop), method: :post, class: "btn btn-outline-primary" %>
+  <% end %>
+<% end %>
+
 <%= link_to '編集', edit_shop_path(@shop), class: 'btn btn-warning' %>
 <%= link_to '一覧に戻る', shops_path, class: 'btn btn-secondary' %>
 
