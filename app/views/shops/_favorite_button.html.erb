@@ -1,3 +1,5 @@
-<%= form_with url: shop_favorite_path(shop), method: current_user.favorite_shops.include?(shop) ? :delete : :post, data: { turbo_frame: "_top" } do %>
-  <%= submit_tag(current_user.favorite_shops.include?(shop) ? "お気に入り解除" : "お気に入り追加", class: "btn btn-outline-primary") %>
+<% if current_user.favorite_shops.include?(shop) %>
+  <%= button_to "お気に入り解除", shop_favorite_path(shop), method: :delete, data: { turbo_stream: true }, class: "btn btn-outline-warning" %>
+<% else %>
+  <%= button_to "お気に入り登録", shop_favorite_path(shop), method: :post, data: { turbo_stream: true }, class: "btn btn-warning" %>
 <% end %>
