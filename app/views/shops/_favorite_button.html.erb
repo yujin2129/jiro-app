@@ -1,5 +1,15 @@
 <% if current_user.favorite_shops.include?(shop) %>
-  <%= button_to "お気に入り解除", shop_favorite_path(shop), method: :delete, data: { turbo_stream: true }, class: "btn btn-outline-warning" %>
+  <%= button_to shop_favorite_path(shop),
+                method: :delete,
+                data: { turbo_stream: true },
+                class: "btn btn-outline-warning d-flex align-items-center gap-1" do %>
+    <i class="bi bi-star-fill"></i> お気に入り解除
+  <% end %>
 <% else %>
-  <%= button_to "お気に入り登録", shop_favorite_path(shop), method: :post, data: { turbo_stream: true }, class: "btn btn-warning" %>
+  <%= button_to shop_favorite_path(shop),
+                method: :post,
+                data: { turbo_stream: true },
+                class: "btn btn-warning d-flex align-items-center gap-1" do %>
+    <i class="bi bi-star"></i> お気に入り登録
+  <% end %>
 <% end %>
