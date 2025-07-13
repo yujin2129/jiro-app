@@ -2,6 +2,7 @@ class Shop < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_by_users, through: :favorites, source: :user
+  has_many :congestions, dependent: :destroy
   has_one_attached :image
 
   validates :name, presence: true, length: { maximum: 50 }
