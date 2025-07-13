@@ -7,4 +7,13 @@ class Shop < ApplicationRecord
   validates :name, presence: true, length: { maximum: 50 }
   validates :address, presence: true, length: { maximum: 100 }
   validates :rules, length: { maximum: 300 }
+
+  def average_rating
+    avg = reviews.average(:rating)
+    avg ? avg.round(1) : 0
+  end
+
+  def average_rating_stars
+    average_rating.round
+  end
 end

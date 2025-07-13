@@ -1,4 +1,19 @@
 <h2><%= @shop.name %></h2>
+<p><strong>評価:</strong>
+  <% if @shop.reviews.exists? %>
+    <% stars = @shop.average_rating_stars %>
+    <% 5.times do |i| %>
+      <% if i < stars %>
+        <span class="text-warning">★</span>
+      <% else %>
+        <span class="text-secondary">☆</span>
+      <% end %>
+    <% end %>
+    <span class="ms-2"><%= @shop.average_rating %> / 5</span>
+  <% else %>
+    <span>まだ評価がありません</span>
+  <% end %>
+</p>
 <p><strong>住所:</strong> <%= @shop.address %></p>
 <p><strong>営業時間:</strong> <%= @shop.opening_hours %></p>
 <p><strong>定休日:</strong> <%= @shop.holiday %></p>
