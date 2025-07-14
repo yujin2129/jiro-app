@@ -8,6 +8,7 @@ class ShopsController < ApplicationController
 
   def show
     @reviews = @shop.reviews.includes(:user)
+    @congestions_by_day = @shop.congestions.group_by { |c| c.visited_on.wday }
   end
 
   def new

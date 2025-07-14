@@ -29,6 +29,46 @@
   <%= render "favorite_button", shop: @shop %>
 </div>
 
+<h2 class="mt-4">混雑情報</h2>
+
+<% days = %w(日 月 火 水 木 金 土) %>
+
+<ul class="nav nav-tabs" id="congestionTab" role="tablist">
+  <% days.each_with_index do |day, index| %>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link <%= 'active' if index == 0 %>" id="day-<%= index %>-tab"
+        data-bs-toggle="tab" data-bs-target="#day-<%= index %>"
+        type="button" role="tab" aria-controls="day-<%= index %>" aria-selected="<%= index == 0 %>">
+        <%= day %>
+      </button>
+    </li>
+  <% end %>
+</ul>
+
+<div class="tab-content mt-3" id="congestionTabContent">
+  <% days.each_with_index do |day, index| %>
+    <div class="tab-pane fade <%= 'show active' if index == 0 %>" id="day-<%= index %>" role="tabpanel"
+      aria-labelledby="day-<%= index %>-tab">
+
+      <% grouped = @congestions_by_day[index] || [] %>
+      <% if grouped.any? %>
+        <% Congestion::VISITED_TIME_SLOTS.each do |time| %>
+          <% time_congestions = grouped.select { |c| c.visited_time == time } %>
+          <% next if time_congestions.empty? %>
+          <div class="mb-2">
+            <strong><%= time %></strong>：
+            平均混雑度：<%= (time_congestions.sum(&:level).to_f / time_congestions.size).round(1) %>
+            （<%= time_congestions.size %>件）
+          </div>
+        <% end %>
+      <% else %>
+        <p>データがありません</p>
+      <% end %>
+
+    </div>
+  <% end %>
+</div>
+
 <%= link_to '編集', edit_shop_path(@shop), class: 'btn btn-warning' %>
 <%= link_to '一覧に戻る', shops_path, class: 'btn btn-secondary' %>
 
@@ -60,12 +100,7 @@
   </div>
   <div class="mb-3">
     <%= f.label :visited_time, "訪問時間帯" %>
-    <%= f.select :visited_time, [
-      "0:00〜2:00", "2:00〜4:00", "4:00〜6:00",
-      "6:00〜8:00", "8:00〜10:00", "10:00〜12:00",
-      "12:00〜14:00", "14:00〜16:00", "16:00〜18:00",
-      "18:00〜20:00", "20:00〜22:00", "22:00〜24:00"
-    ], {}, class: "form-control" %>
+    <%= f.select :visited_time, Congestion::VISITED_TIME_SLOTS, {}, class: "form-control" %>
   </div>
   <div class="mb-3">
     <%= f.label :level, "混雑度（1〜5）" %>
