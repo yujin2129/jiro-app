@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'home/index'
   root "home#index"
-  get "search", to: "shops#search", as: "shop_search"
 
   devise_for :users
   resources :shops do

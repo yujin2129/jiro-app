@@ -1,9 +1,0 @@
-<h2>検索結果</h2>
-
-<% if @shops.any? %>
-  <div class="row">
-    <%= render partial: "shops/shop_card", collection: @shops, as: :shop %>
-  </div>
-<% else %>
-  <p>該当する店舗が見つかりませんでした。</p>
-<% end %>

@@ -46,14 +46,6 @@ class ShopsController < ApplicationController
     redirect_to shops_path, notice: '店舗を削除しました。'
   end
 
-  def search
-    if params[:keyword].present?
-      @shops = Shop.where("name LIKE ? OR address LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
-    else
-      @shops = Shop.all
-    end
-  end
-
   private
 
   def set_shop
