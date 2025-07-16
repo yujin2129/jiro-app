@@ -1,0 +1,20 @@
+<div class="text-center my-5">
+  <h1 class="display-4">ジロマップ</h1>
+  <p class="lead">お気に入りの店舗を検索しよう！</p>
+</div>
+
+<div class="row justify-content-center mb-4">
+  <div class="col-md-6">
+    <%= form_with url: shop_search_path, method: :get, local: true do |f| %>
+      <div class="input-group">
+        <%= f.text_field :keyword, class: "form-control", placeholder: "店舗名や住所で検索" %>
+        <button class="btn btn-warning" type="submit">検索</button>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<h3 class="text-center mb-3">人気店舗</h3>
+<div class="row">
+  <%= render partial: "shops/shop_card", collection: @shops, as: :shop %>
+</div>
