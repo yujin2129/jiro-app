@@ -11,7 +11,7 @@
         <%= link_to "登録", new_user_registration_path, class: "btn btn-dark btn-sm" %>
       <% end %>
 
-      <%= form_with url: shop_search_path, method: :get, local: true, class: "d-flex ms-auto", role: "search" do |f| %>
+      <%= form_with url: shops_path, method: :get, local: true, class: "d-flex ms-auto", role: "search" do |f| %>
         <%= f.search_field :keyword, placeholder: "店舗検索", class: "form-control form-control-sm me-2" %>
         <%= f.submit "検索", class: "btn btn-sm btn-outline-light" %>
       <% end %>

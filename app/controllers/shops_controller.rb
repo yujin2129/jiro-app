@@ -3,7 +3,13 @@ class ShopsController < ApplicationController
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
 
   def index
-    @shops = Shop.all
+    if params[:keyword].present?
+      @shops = Shop.where("name LIKE ? OR address LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+    else
+      @shops = Shop.left_joins(:favorites)
+                   .group(:id)
+                   .order("COUNT(favorites.id) DESC")
+    end
   end
 
   def show
