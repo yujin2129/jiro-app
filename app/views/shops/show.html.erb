@@ -19,6 +19,9 @@
 <p><strong>定休日:</strong> <%= @shop.holiday %></p>
 <p><strong>ルール:</strong> <%= @shop.rules %></p>
 
+<div id="map" style="height: 400px; width: 100%;"></div>
+<p id="shop-address" style="display: none;"><%= @shop.address %></p>
+
 <% if @shop.image.attached? %>
   <div>
     <%= image_tag @shop.image.variant(resize_to_limit: [600, 400]) %>
