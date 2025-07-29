@@ -59,7 +59,8 @@ class ShopsController < ApplicationController
       :rules,
       :opening_hours,
       :holiday,
-      :image
+      :image,
+      :menu
     )
   end
 end

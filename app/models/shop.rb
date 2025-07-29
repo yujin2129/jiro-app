@@ -7,6 +7,7 @@ class Shop < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :address, presence: true, length: { maximum: 100 }
+  validates :menu, length: { maximum: 1000 }
   validates :rules, length: { maximum: 300 }
 
   def average_rating

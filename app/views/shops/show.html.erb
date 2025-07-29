@@ -17,6 +17,7 @@
 <p><strong>住所:</strong> <%= @shop.address %></p>
 <p><strong>営業時間:</strong> <%= @shop.opening_hours %></p>
 <p><strong>定休日:</strong> <%= @shop.holiday %></p>
+<p><strong>メニュー:</strong><br><%= simple_format(@shop.menu) %></p>
 <p><strong>ルール:</strong> <%= @shop.rules %></p>
 
 <div id="map" style="height: 400px; width: 100%;"></div>
