@@ -1,20 +1,51 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-warning">
-  <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark bg-warning border-bottom px-3">
+  <div class="container-fluid">
     <a class="navbar-brand fw-bold" href="/">ジロマップ</a>
-    <div class="d-flex align-items-center ms-auto">
-      <% if user_signed_in? %>
-        <span class="me-3 fw-bold"><%= current_user.name %> さん</span>
-        <%= link_to "プロフィール", user_profile_path, class: "btn btn-sm btn-outline-light me-2" %>
-        <%= button_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-dark btn-sm" %>
-      <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-dark btn-sm me-2" %>
-        <%= link_to "登録", new_user_registration_path, class: "btn btn-dark btn-sm" %>
-      <% end %>
 
-      <%= form_with url: shops_path, method: :get, local: true, class: "d-flex ms-auto", role: "search" do |f| %>
-        <%= f.search_field :keyword, placeholder: "店舗検索", class: "form-control form-control-sm me-2" %>
-        <%= f.submit "検索", class: "btn btn-sm btn-outline-light" %>
-      <% end %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+      aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+      <ul class="navbar-nav mb-2 mb-lg-0 align-items-lg-center">
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle fw-bold" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-person-circle"></i> <%= current_user.name %>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><%= link_to "プロフィール", user_profile_path, class: "dropdown-item" %></li>
+              <li>
+                <%= button_to "ログアウト", destroy_user_session_path,
+                              method: :delete,
+                              form: { class: "d-inline" },
+                              class: "dropdown-item text-danger" %>
+              </li>
+            </ul>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "ログイン", new_user_session_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "登録", new_user_registration_path, class: "nav-link" %>
+          </li>
+        <% end %>
+
+        <li class="nav-item ms-lg-3">
+          <%= form_with url: shops_path, method: :get, local: true, class: "d-flex", role: "search" do |f| %>
+            <div class="input-group input-group-sm">
+              <%= f.search_field :keyword, placeholder: "店舗検索",
+                    class: "form-control border-dark rounded-start", style: "width: 180px;" %>
+              <button class="btn btn-dark rounded-end" type="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </div>
+          <% end %>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

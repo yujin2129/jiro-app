@@ -38,6 +38,11 @@ body {
     border: 2px solid $jiro-black;
     box-shadow: none;
   }
+
+  .nav-link {
+    font-weight: bold;
+    color: $jiro-black !important;
+  }
 }
 
 .btn {
@@ -81,4 +86,15 @@ body {
     background-color: darken($jiro-red, 10%);
     transform: scale(1.05);
   }
+}
+
+.dropdown-menu {
+  border-radius: 0.4rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+  max-width: 220px;
+  font-size: 0.9rem;
+}
+.dropdown-item:hover {
+  background-color: #ffeeba;
 }
