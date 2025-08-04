@@ -17,5 +17,5 @@
 <h3 class="text-center mb-3">人気店舗</h3>
 <div class="row">
   <%= render partial: "shops/shop_card", collection: @shops, as: :shop,
-             locals: { image_size: [400, 250], truncate_length: 40, show_actions: false } %>
+             locals: { image_size: [400, 250], truncate_length: 40 } %>
 </div>

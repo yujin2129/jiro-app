@@ -15,7 +15,7 @@
 <% if @shops.any? %>
   <div class="row">
     <%= render partial: "shop_card", collection: @shops, as: :shop,
-               locals: { image_size: [400, 200], truncate_length: 30, show_actions: true } %>
+               locals: { image_size: [400, 200], truncate_length: 30 } %>
   </div>
 <% else %>
   <p>該当する店舗が見つかりませんでした。</p>

@@ -9,13 +9,11 @@
 
       <%= link_to "詳細", shop_path(shop), class: "btn btn-sm btn-outline-warning" %>
 
-      <% if show_actions %>
-        <% if user_signed_in? && current_user.admin? %>
-          <%= link_to "編集", edit_shop_path(shop), class: "btn btn-sm btn-outline-secondary ms-1" %>
-          <%= button_to "削除", shop_path(shop), method: :delete,
-                        data: { turbo_confirm: "本当に削除しますか？" },
-                        class: "btn btn-sm btn-outline-danger ms-1" %>
-        <% end %>
+      <% if user_signed_in? && current_user.admin? %>
+        <%= link_to "編集", edit_shop_path(shop), class: "btn btn-sm btn-outline-secondary ms-1" %>
+        <%= button_to "削除", shop_path(shop), method: :delete,
+                      data: { turbo_confirm: "本当に削除しますか？" },
+                      class: "btn btn-sm btn-outline-danger ms-1" %>
       <% end %>
     </div>
   </div>
