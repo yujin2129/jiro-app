@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_shop, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
     if params[:keyword].present?
@@ -62,5 +63,11 @@ class ShopsController < ApplicationController
       :image,
       :menu
     )
+  end
+
+  def require_admin!
+    unless current_user&.admin?
+      redirect_to root_path, alert: "管理者のみが操作できます"
+    end
   end
 end
