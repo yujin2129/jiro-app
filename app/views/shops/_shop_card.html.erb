@@ -7,14 +7,16 @@
       <h5 class="card-title"><%= shop.name %></h5>
       <p class="card-text"><%= truncate(shop.address, length: truncate_length) %></p>
 
-      <%= link_to "詳細", shop_path(shop), class: "btn btn-sm btn-outline-warning" %>
-
-      <% if user_signed_in? && current_user.admin? %>
-        <%= link_to "編集", edit_shop_path(shop), class: "btn btn-sm btn-outline-secondary ms-1" %>
-        <%= button_to "削除", shop_path(shop), method: :delete,
-                      data: { turbo_confirm: "本当に削除しますか？" },
-                      class: "btn btn-sm btn-outline-danger ms-1" %>
-      <% end %>
+      <div class="d-flex">
+        <%= link_to "詳細", shop_path(shop), class: "btn btn-sm btn-outline-warning" %>
+  
+        <% if user_signed_in? && current_user.admin? %>
+          <%= link_to "編集", edit_shop_path(shop), class: "btn btn-sm btn-outline-secondary ms-1" %>
+          <%= button_to "削除", shop_path(shop), method: :delete,
+                        data: { turbo_confirm: "本当に削除しますか？" },
+                        class: "btn btn-sm btn-outline-danger ms-1" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
