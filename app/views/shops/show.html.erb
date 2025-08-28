@@ -71,36 +71,64 @@
   </div>
 
   <div class="tab-pane fade" id="congestion" role="tabpanel" aria-labelledby="congestion-tab">
-    <ul class="nav nav-tabs mt-2" id="congestionDayTab" role="tablist">
+    <ul class="nav nav-tabs" id="congestionTab" role="tablist">
       <% days = %w(日 月 火 水 木 金 土) %>
       <% days.each_with_index do |day, index| %>
         <li class="nav-item" role="presentation">
-          <button class="nav-link <%= 'active' if index == 0 %>" id="day-<%= index %>-tab"
-                  data-bs-toggle="tab" data-bs-target="#day-<%= index %>"
-                  type="button" role="tab" aria-controls="day-<%= index %>" aria-selected="<%= index == 0 %>">
+          <button class="nav-link <%= 'active' if index == 0 %>" 
+                  id="day-<%= index %>-tab"
+                  data-bs-toggle="tab" 
+                  data-bs-target="#day-<%= index %>"
+                  type="button" role="tab" 
+                  aria-controls="day-<%= index %>" 
+                  aria-selected="<%= index == 0 %>">
             <%= day %>
           </button>
         </li>
       <% end %>
     </ul>
 
-    <div class="tab-content mt-2" id="congestionDayTabContent">
+    <div class="tab-content mt-3" id="congestionTabContent">
       <% days.each_with_index do |day, index| %>
-        <div class="tab-pane fade <%= 'show active' if index == 0 %>" id="day-<%= index %>" role="tabpanel" aria-labelledby="day-<%= index %>-tab">
+        <div class="tab-pane fade <%= 'show active' if index == 0 %>" 
+             id="day-<%= index %>" role="tabpanel" 
+             aria-labelledby="day-<%= index %>-tab">
+
           <% grouped = @congestions_by_day[index] || [] %>
-          <% if grouped.any? %>
-            <% Congestion::VISITED_TIME_SLOTS.each do |time| %>
-              <% time_congestions = grouped.select { |c| c.visited_time == time } %>
-              <% next if time_congestions.empty? %>
-              <div class="mb-2">
-                <strong><%= time %></strong>：
-                平均混雑度：<%= (time_congestions.sum(&:level).to_f / time_congestions.size).round(1) %>
-                （<%= time_congestions.size %>件）
-              </div>
-            <% end %>
-          <% else %>
-            <p>データがありません</p>
-          <% end %>
+
+          <table class="congestion-table table-sm text-center">
+            <thead>
+              <tr>
+                <th>時間帯</th>
+                <% (1..5).each do |level| %>
+                  <th><%= CongestionsHelper::CONGESTION_LEVEL_LABELS[level] %></th>
+                <% end %>   
+              </tr>
+            </thead>
+            <tbody>
+              <% Congestion::VISITED_TIME_SLOTS.each do |time| %>
+                <tr>
+                  <td class="fw-bold"><%= time %></td>
+
+                  <% counts = (1..5).map { |level| grouped.count { |c| c.visited_time == time && c.level == level } } %>
+                  <% max_count = counts.max %>
+
+                  <% (1..5).each_with_index do |level, idx| %>
+                    <% count = counts[idx] %>
+                    <td class="<%= 'highlight' if count == max_count && count > 0 %>">
+                      <% if count > 0 %>
+                        <strong><%= "#{count}件" %></strong>
+                      <% else %>
+                        <span class="text-muted">0件</span>
+                      <% end %>
+                    </td>
+                  <% end %>
+
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+
         </div>
       <% end %>
     </div>
@@ -118,7 +146,13 @@
         </div>
         <div class="mb-2">
           <%= f.label :level %>
-          <%= f.number_field :level, in: 1..5, class: "form-control" %>
+          <%= f.select :level, options_for_select([
+              ["空席あり", 1],
+              ["満席近い", 2],
+              ["〜30分待ち", 3],
+              ["30分〜1時間待ち", 4],
+              ["1時間〜待ち", 5]
+            ]), {}, class: "form-control" %>
         </div>
         <%= f.submit "投稿", class: "btn btn-dark" %>
       <% end %>

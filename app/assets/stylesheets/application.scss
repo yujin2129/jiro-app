@@ -176,3 +176,42 @@ body {
     font-size: 0.85rem;
   }
 }
+
+.congestion-table {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    background-color: $jiro-yellow;
+    color: $jiro-black;
+    font-weight: bold;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.2);
+  }
+
+  th, td {
+    border: 2px solid $jiro-black;
+    padding: 0.4rem 0.6rem;
+    text-align: center;
+    vertical-align: middle;
+    transition: all 0.2s;
+  }
+
+  tbody tr:hover {
+    background-color: #fff3cd;
+  }
+
+  td.highlight {
+    background-color: #ffd699;
+    font-weight: bold;
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+    border-radius: 0.3rem;
+  }
+
+  td span.text-muted {
+    color: rgba(0,0,0,0.3);
+  }
+
+  td strong {
+    font-size: 0.9rem;
+  }
+}
