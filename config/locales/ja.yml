@@ -1,8 +1,21 @@
 ja:
   activerecord:
     models:
-      shop: 店舗
+      congestion: "混雑情報"
+      review: "レビュー"
+      shop: "店舗"
     attributes:
+      congestion:
+        visited_on: "訪問日"
+        visited_time: "訪問時間帯"
+        level: "混雑度"
+        user: "ユーザー"
+        shop: "店舗"
+      review:
+        rating: "評価"
+        content: "レビュー内容"
+        user: "ユーザー"
+        shop: "店舗"
       shop:
         name: 店舗名
         address: 住所
