@@ -3,9 +3,20 @@
     <% if shop.image.attached? %>
       <%= image_tag shop.image.variant(resize_to_limit: image_size), class: "card-img-top" %>
     <% end %>
+
     <div class="card-body">
       <h5 class="card-title"><%= shop.name %></h5>
       <p class="card-text"><%= truncate(shop.address, length: truncate_length) %></p>
+
+      <p class="mb-1">
+        <% if user_signed_in? && current_user.favorites.exists?(shop_id: shop.id) %>
+          <span class="badge bg-warning text-dark">お気に入り済み</span>
+        <% end %>
+      </p>
+
+      <p class="mb-2">
+        <%= render "star_rating", shop: shop %>
+      </p>
 
       <div class="d-flex">
         <%= link_to "詳細", shop_path(shop), class: "btn btn-sm btn-outline-warning" %>

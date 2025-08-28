@@ -1,0 +1,12 @@
+<% if shop.reviews.exists? %>
+  <% stars = shop.average_rating_stars %>
+  <% 5.times do |i| %>
+    <% if i < stars %>
+      <span class="text-warning">★</span>
+    <% else %>
+      <span class="text-secondary">☆</span>
+    <% end %>
+  <% end %>
+<% else %>
+  <span>まだ評価がありません</span>
+<% end %>
