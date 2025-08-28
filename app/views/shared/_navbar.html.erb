@@ -17,6 +17,9 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><%= link_to "プロフィール", user_profile_path, class: "dropdown-item" %></li>
+              <% if user_signed_in? && current_user.admin? %>
+                <li><%= link_to "新規店舗登録", new_shop_path, class: "dropdown-item" %></li>
+              <% end %>
               <li>
                 <%= button_to "ログアウト", destroy_user_session_path,
                               method: :delete,
