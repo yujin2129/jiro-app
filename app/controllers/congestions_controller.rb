@@ -8,7 +8,8 @@ class CongestionsController < ApplicationController
     if @congestion.save
       redirect_to shop_path(@shop), notice: "混雑情報を投稿しました"
     else
-      redirect_to shop_path(@shop), alert: "投稿に失敗しました"
+      set_shop_resources
+      render "shops/show", status: :unprocessable_entity
     end
   end
 

@@ -8,7 +8,7 @@ class ReviewsController < ApplicationController
     if @review.save
       redirect_to shop_path(@shop), notice: "レビューを投稿しました"
     else
-      @reviews = @shop.reviews.includes(:user)
+      set_shop_resources
       render "shops/show", status: :unprocessable_entity
     end
   end
