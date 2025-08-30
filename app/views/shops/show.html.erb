@@ -63,8 +63,14 @@
         <%= simple_format(@shop.rules) %>
       </div>
 
-      <% if @shop.image.attached? %>
-        <%= image_tag @shop.image.variant(resize_to_limit: [600, 400]), class: "img-fluid rounded mb-3" %>
+      <% if @shop.images.attached? %>
+        <h5>店舗画像</h5>
+          <div class="shop-images d-flex flex-wrap gap-2 mt-2">
+            <% @shop.images.each do |image| %>
+              <%= image_tag image.variant(resize_to_limit: [300, 200]),
+                            class: "img-thumbnail" %>
+            <% end %>
+          </div>
       <% end %>
 
       <div id="map" style="height: 400px; width: 100%; margin-bottom: 1rem;"></div>

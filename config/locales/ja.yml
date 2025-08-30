@@ -24,6 +24,6 @@ ja:
         holiday: 定休日
         menu: 主なメニュー・価格
         rules: 店舗ルール
-        image: 画像
+        images: 画像
       user:
         name: 名前
