@@ -1,5 +1,12 @@
-<% if shop.reviews.exists? %>
+<% if local_assigns[:rating] %>
+  <% stars = rating.to_i %>
+<% elsif local_assigns[:shop] && shop.reviews.exists? %>
   <% stars = shop.average_rating_stars %>
+<% else %>
+  <% stars = nil %>
+<% end %>
+
+<% if stars.present? %>
   <% 5.times do |i| %>
     <% if i < stars %>
       <span class="text-warning">★</span>

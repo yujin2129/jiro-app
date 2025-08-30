@@ -146,7 +146,8 @@
       <div class="card mb-2 bg-light border border-dark">
         <div class="card-body p-2">
           <strong><%= review.user.name %></strong>
-          <span class="ms-2">評価: <%= review.rating %></span>
+          <span class="ms-2"><%= render "shops/star_rating", rating: review.rating %></span>
+          <p class="mb-0"><%= review.content %></p>
           <% if review.persisted? && review.images.attached? %>
             <div class="mt-2 d-flex flex-wrap">
               <% review.images.each do |image| %>
@@ -155,7 +156,6 @@
               <% end %>
             </div>
           <% end %>
-          <p class="mb-0"><%= review.content %></p>
         </div>
       </div>
     <% end %>
