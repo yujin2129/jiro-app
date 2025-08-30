@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :shops do
-    resources :reviews, only: [:new, :create, :destroy]
+    resources :reviews, only: [:new, :create, :edit, :update, :destroy]
     resource :favorite, only: [:create, :destroy]
     resources :congestions, only: [:new, :create]
   end

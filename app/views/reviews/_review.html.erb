@@ -20,5 +20,16 @@
         <% end %>
       </div>
     <% end %>
+
+    <% if user_signed_in? && review.user == current_user %>
+      <div class="mt-2 d-flex">
+        <%= link_to "編集", edit_shop_review_path(review.shop, review),
+                    class: "btn btn-sm btn-outline-secondary me-1" %>
+        <%= button_to "削除", shop_review_path(review.shop, review),
+                      method: :delete,
+                      data: { turbo_confirm: "本当に削除しますか？" },
+                      class: "btn btn-sm btn-outline-danger" %>
+      </div>
+    <% end %>
   </div>
 </div>

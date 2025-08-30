@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_shop
+  before_action :set_review, only: [:edit, :update, :destroy]
 
   def new
     @review = @shop.reviews.new
@@ -16,8 +17,18 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @review.update(review_params)
+      redirect_to shop_path(@shop), notice: '店舗情報を更新しました。'
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
   def destroy
-    @review = @shop.reviews.find(params[:id])
     if @review.user == current_user
       @review.destroy
       redirect_to shop_path(@shop), notice: "レビューを削除しました"
@@ -30,6 +41,10 @@ class ReviewsController < ApplicationController
 
   def set_shop
     @shop = Shop.find(params[:shop_id])
+  end
+
+  def set_review
+    @review = @shop.reviews.find(params[:id])
   end
 
   def review_params
