@@ -16,6 +16,7 @@ ja:
         content: "レビュー内容"
         user: "ユーザー"
         shop: "店舗"
+        images: "画像"
       shop:
         name: 店舗名
         address: 住所
