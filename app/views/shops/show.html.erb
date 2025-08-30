@@ -1,10 +1,12 @@
-<h2 class="mb-3 d-flex align-items-center justify-content-between">
-  <span><%= @shop.name %></span>
-  <div>
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0"><%= @shop.name %></h2>
+
+  <div class="d-flex align-items-center">
+    <%= link_to "戻る", request.referer || shops_path, class: "btn btn-outline-secondary me-2" %>
     <%= link_to "混雑情報を投稿", new_shop_congestion_path(@shop), class: "btn btn-outline-dark me-2" %>
     <%= link_to "レビューを投稿", new_shop_review_path(@shop), class: "btn btn-warning" %>
   </div>
-</h2>
+</div>
 
 <ul class="nav nav-pills nav-fill mb-3" id="shopTab" role="tablist">
   <li class="nav-item" role="presentation">
@@ -79,6 +81,15 @@
       <div id="favorite_button" class="mt-2">
         <%= render "shops/favorite_button", shop: @shop %>
       </div>
+
+      <% if user_signed_in? && current_user.admin? %>
+        <div class="mt-3 d-flex justify-content-end">
+          <%= link_to "編集", edit_shop_path(@shop), class: "btn btn-sm btn-outline-secondary me-2" %>
+          <%= button_to "削除", shop_path(@shop), method: :delete,
+                        data: { turbo_confirm: "本当に削除しますか？" },
+                        class: "btn btn-sm btn-outline-danger" %>
+        </div>
+      <% end %>
     </div>
   </div>
 
