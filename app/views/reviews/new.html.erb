@@ -6,7 +6,12 @@
     <%= form_with model: [@shop, @review], local: true do |f| %>
       <div class="mb-3">
         <%= f.label :rating, class: "form-label fw-bold" %>
-        <%= f.number_field :rating, in: 1..5, class: "form-control" %>
+        <div class="star-rating-input">
+          <% 5.times do |i| %>
+            <%= f.radio_button :rating, i + 1, id: "rating_#{i+1}" %>
+            <label for="rating_<%= i+1 %>">★</label>
+          <% end %>
+        </div>
       </div>
 
       <div class="mb-3">

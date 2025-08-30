@@ -215,3 +215,26 @@ body {
     font-size: 0.9rem;
   }
 }
+
+.star-rating-input {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  label {
+    font-size: 2rem;
+    color: #ccc;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  input[type="radio"]:checked ~ label,
+  label:hover,
+  label:hover ~ label {
+    color: $jiro-yellow;
+  }
+}
