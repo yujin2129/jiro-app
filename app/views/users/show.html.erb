@@ -13,15 +13,7 @@
 
 <h2 class="h4 mb-3">📝 投稿したレビュー</h2>
 <% if @reviews.any? %>
-  <% @reviews.each do |review| %>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title"><%= review.shop.name %>（評価: <%= review.rating %>）</h5>
-        <p class="card-text"><%= review.content %></p>
-        <p class="card-text text-muted"><%= review.created_at.strftime("%Y/%m/%d %H:%M") %></p>
-      </div>
-    </div>
-  <% end %>
+  <%= render @reviews %>
 <% else %>
   <p>レビューはまだありません。</p>
 <% end %>
@@ -31,19 +23,7 @@
 <h2 class="h4 mb-3">⭐ お気に入り店舗</h2>
 <% if @favorite_shops.any? %>
   <div class="row">
-    <% @favorite_shops.each do |shop| %>
-      <div class="col-md-6 mb-3">
-        <div class="card h-100">
-          <% if shop.image.attached? %>
-            <%= image_tag shop.image.variant(resize_to_limit: [600, 400]), class: "card-img-top" %>
-          <% end %>
-          <div class="card-body">
-            <h5 class="card-title"><%= link_to shop.name, shop_path(shop), class: "text-decoration-none" %></h5>
-            <p class="card-text"><%= truncate(shop.rules, length: 50) %></p>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <%= render partial: "shops/shop_card", collection: @favorite_shops, as: :shop %>
   </div>
 <% else %>
   <p>お気に入り登録はまだありません。</p>

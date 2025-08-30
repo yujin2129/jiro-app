@@ -1,0 +1,24 @@
+<div class="card mb-2 bg-light border border-dark">
+  <div class="card-body p-2">
+    <div class="d-flex justify-content-between">
+      <div>
+        <strong><%= review.user.name %></strong>
+        <span class="ms-2"><%= render "shops/star_rating", rating: review.rating %></span>
+      </div>
+      <small class="text-muted">
+        <%= l(review.created_at, format: :short) %>
+      </small>
+    </div>
+
+    <p class="mb-0"><%= review.content %></p>
+
+    <% if review.persisted? && review.images.attached? %>
+      <div class="mt-2 d-flex flex-wrap">
+        <% review.images.each do |image| %>
+          <%= image_tag image.variant(resize_to_limit: [200, 200]),
+                class: "img-thumbnail me-2 mb-2" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
