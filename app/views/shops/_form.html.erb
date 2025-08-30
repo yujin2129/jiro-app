@@ -1,49 +1,71 @@
-<%= form_with model: @shop, local: true do |f| %>
-  <% if @shop.errors.any? %>
-    <div class="alert alert-danger">
-      <ul>
-        <% @shop.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :name %>
-    <%= f.text_field :name, class: "form-control" %>
+<div class="card border border-dark shadow-sm bg-light-subtle">
+  <div class="card-header bg-warning text-dark fw-bold">
+    <%= @shop.new_record? ? "新規店舗登録" : "店舗情報編集" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :address %>
-    <%= f.text_field :address, class: "form-control" %>
-  </div>
+  <div class="card-body">
+    <%= form_with model: @shop, local: true do |f| %>
+      <%= render "shared/error_messages", object: @shop %>
 
-  <div class="form-group">
-    <%= f.label :opening_hours %>
-    <%= f.text_field :opening_hours, class: "form-control" %>
-  </div>
+      <div class="mb-3">
+        <%= f.label :name, class: "form-label fw-bold d-inline" %>
+        <span class="text-danger">*</span>
+        <div class="input-group">
+          <span class="input-group-text bg-dark text-warning"><i class="bi bi-shop"></i></span>
+          <%= f.text_field :name, class: "form-control", placeholder: "例: ラーメン二郎 三田本店" %>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :holiday %>
-    <%= f.text_field :holiday, class: "form-control" %>
-  </div>
+      <div class="mb-3">
+        <%= f.label :address, class: "form-label fw-bold" %>
+        <span class="text-danger">*</span>
+        <div class="input-group">
+          <span class="input-group-text bg-dark text-warning"><i class="bi bi-geo-alt"></i></span>
+          <%= f.text_field :address, class: "form-control", placeholder: "例: 東京都港区〇〇…" %>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :menu %>
-    <%= f.text_area :menu, class: "form-control", rows: 4 %>
-  </div>
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <%= f.label :opening_hours, class: "form-label fw-bold" %>
+          <div class="input-group">
+            <span class="input-group-text bg-dark text-warning"><i class="bi bi-clock"></i></span>
+            <%= f.text_field :opening_hours, class: "form-control", placeholder: "例: 11:00〜15:00" %>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <%= f.label :holiday, class: "form-label fw-bold" %>
+          <div class="input-group">
+            <span class="input-group-text bg-dark text-warning"><i class="bi bi-calendar-x"></i></span>
+            <%= f.text_field :holiday, class: "form-control", placeholder: "例: 日曜・祝日" %>
+          </div>
+        </div>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :rules %>
-    <%= f.text_area :rules, class: "form-control" %>
-  </div>
+      <div class="mb-3">
+        <%= f.label :menu, class: "form-label fw-bold" %>
+        <%= f.text_area :menu, class: "form-control", rows: 4, placeholder: "代表的なメニューや価格などを記載" %>
+      </div>
 
-  <div class="form-group">
-    <%= f.label :images %>
-    <%= f.file_field :images, multiple: true, accept: "image/*", class: "form-control" %>
-  </div>
+      <div class="mb-3">
+        <%= f.label :rules, class: "form-label fw-bold" %>
+        <%= f.text_area :rules, class: "form-control", rows: 3, placeholder: "例: 食券制・麺カタメ不可…" %>
+      </div>
 
-  <%= f.submit class: "btn btn-primary mt-3" %>
-<% end %>
-  
+      <div class="mb-3">
+        <%= f.label :images, class: "form-label fw-bold" %>
+        <div class="border rounded p-3 bg-white text-center">
+          <i class="bi bi-images display-6 text-muted"></i>
+          <p class="mb-1 text-muted small">店舗外観やメニュー写真をアップロードできます</p>
+          <%= f.file_field :images, multiple: true, accept: "image/*", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <%= link_to "戻る", shops_path, class: "btn btn-outline-dark" %>
+        <%= f.submit (@shop.new_record? ? "登録する" : "更新する"),
+                     class: "btn btn-warning fw-bold" %>
+      </div>
+    <% end %>
+  </div>
+</div>
