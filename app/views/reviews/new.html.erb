@@ -21,7 +21,11 @@
 
       <div class="mb-3">
         <%= f.label :images, class: "form-label fw-bold" %>
-        <%= f.file_field :images, multiple: true, class: "form-control" %>
+        <div class="border rounded p-3 bg-white text-center">
+          <i class="bi bi-images display-6 text-muted"></i>
+          <p class="mb-1 text-muted small">店舗外観やメニュー写真をアップロードできます</p>
+          <%= f.file_field :images, multiple: true, accept: "image/*", class: "form-control" %>
+        </div>
       </div>
 
       <div class="d-flex justify-content-between">
