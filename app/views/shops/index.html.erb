@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-between align-items-center mb-3">
-  <h2 class="mb-0">
+  <h2 class="mb-0 font-jiro text-dark border-bottom border-3 border-warning pb-1">
     <% if params[:keyword].present? %>
       「<%= params[:keyword] %>」の検索結果
     <% else %>
@@ -8,14 +8,13 @@
   </h2>
 
   <% if user_signed_in? && current_user.admin? %>
-    <%= link_to "新規店舗登録", new_shop_path, class: "btn btn-primary" %>
+    <%= link_to "新規店舗登録", new_shop_path, class: "btn btn-warning" %>
   <% end %>
 </div>
 
 <% if @shops.any? %>
   <div class="row">
-    <%= render partial: "shop_card", collection: @shops, as: :shop,
-               locals: { image_size: [400, 200], truncate_length: 30 } %>
+    <%= render partial: "shop_card", collection: @shops, as: :shop %>
   </div>
 <% else %>
   <p>該当する店舗が見つかりませんでした。</p>

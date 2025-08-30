@@ -1,12 +1,12 @@
 <div class="col-md-4 mb-3">
   <div class="card bg-light text-dark h-100">
     <% if shop.images.attached? %>
-      <%= image_tag shop.images.first.variant(resize_to_limit: image_size), class: "card-img-top" %>
+      <%= image_tag shop.images.first.variant(resize_to_limit: [400, 250]), class: "card-img-top" %>
     <% end %>
 
     <div class="card-body">
       <h5 class="card-title"><%= shop.name %></h5>
-      <p class="card-text"><%= truncate(shop.address, length: truncate_length) %></p>
+      <p class="card-text"><%= truncate(shop.address, length: 30) %></p>
 
       <p class="mb-1">
         <% if user_signed_in? && current_user.favorites.exists?(shop_id: shop.id) %>
