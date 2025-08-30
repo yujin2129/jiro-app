@@ -1,7 +1,10 @@
-<h2 class="mb-3 font-jiro"><%= @shop.name %></h2>
-
-<%= render "shared/error_messages", object: @review %>
-<%= render "shared/error_messages", object: @congestion %>
+<h2 class="mb-3 d-flex align-items-center justify-content-between">
+  <span><%= @shop.name %></span>
+  <div>
+    <%= link_to "混雑情報を投稿", new_shop_congestion_path(@shop), class: "btn btn-outline-dark me-2" %>
+    <%= link_to "レビューを投稿", new_shop_review_path(@shop), class: "btn btn-warning" %>
+  </div>
+</h2>
 
 <ul class="nav nav-pills nav-fill mb-3" id="shopTab" role="tablist">
   <li class="nav-item" role="presentation">
@@ -136,30 +139,6 @@
       <% end %>
     </div>
 
-    <div class="card p-3 mt-3 border border-dark bg-warning-light">
-      <h5>混雑情報を投稿</h5>
-      <%= form_with model: [@shop, Congestion.new], local: true do |f| %>
-        <div class="mb-2">
-          <%= f.label :visited_on %>
-          <%= f.date_field :visited_on, class: "form-control" %>
-        </div>
-        <div class="mb-2">
-          <%= f.label :visited_time %>
-          <%= f.select :visited_time, Congestion::VISITED_TIME_SLOTS, {}, class: "form-control" %>
-        </div>
-        <div class="mb-2">
-          <%= f.label :level %>
-          <%= f.select :level, options_for_select([
-              ["空席あり", 1],
-              ["満席近い", 2],
-              ["〜30分待ち", 3],
-              ["30分〜1時間待ち", 4],
-              ["1時間〜待ち", 5]
-            ]), {}, class: "form-control" %>
-        </div>
-        <%= f.submit "投稿", class: "btn btn-dark" %>
-      <% end %>
-    </div>
   </div>
 
   <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
@@ -168,7 +147,7 @@
         <div class="card-body p-2">
           <strong><%= review.user.name %></strong>
           <span class="ms-2">評価: <%= review.rating %></span>
-          <% if review.images.attached? %>
+          <% if review.persisted? && review.images.attached? %>
             <div class="mt-2 d-flex flex-wrap">
               <% review.images.each do |image| %>
                 <%= image_tag image.variant(resize_to_limit: [200, 200]),
@@ -181,24 +160,6 @@
       </div>
     <% end %>
 
-    <div class="card p-3 mt-3 border border-dark bg-light-subtle">
-      <h5>レビューを投稿</h5>
-      <%= form_with model: [@shop, Review.new], local: true do |f| %>
-        <div class="mb-2">
-          <%= f.label :rating %>
-          <%= f.number_field :rating, in: 1..5, class: "form-control" %>
-        </div>
-        <div class="mb-2">
-          <%= f.label :content %>
-          <%= f.text_area :content, class: "form-control" %>
-        </div>
-        <div class="mb-2">
-          <%= f.label :images %>
-          <%= f.file_field :images, multiple: true, class: "form-control" %>
-        </div>
-        <%= f.submit "投稿", class: "btn btn-warning" %>
-      <% end %>
-    </div>
   </div>
 
 </div>

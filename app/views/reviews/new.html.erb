@@ -1,0 +1,28 @@
+<div class="container mt-4">
+  <%= render "shared/error_messages", object: @review %>
+  <div class="card p-4 border border-dark bg-light-subtle">
+    <h3 class="mb-3 font-jiro"><i class="bi bi-chat-dots-fill me-2"></i>レビューを投稿</h3>
+
+    <%= form_with model: [@shop, @review], local: true do |f| %>
+      <div class="mb-3">
+        <%= f.label :rating, class: "form-label fw-bold" %>
+        <%= f.number_field :rating, in: 1..5, class: "form-control" %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :content, class: "form-label fw-bold" %>
+        <%= f.text_area :content, class: "form-control", rows: 4 %>
+      </div>
+
+      <div class="mb-3">
+        <%= f.label :images, class: "form-label fw-bold" %>
+        <%= f.file_field :images, multiple: true, class: "form-control" %>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <%= link_to "戻る", shop_path(@shop), class: "btn btn-outline-dark" %>
+        <%= f.submit "投稿する", class: "btn btn-warning px-4" %>
+      </div>
+    <% end %>
+  </div>
+</div>

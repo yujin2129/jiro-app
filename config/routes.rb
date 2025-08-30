@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
   devise_for :users
   resources :shops do
-    resources :reviews, only: [:create, :destroy]
+    resources :reviews, only: [:new, :create, :destroy]
     resource :favorite, only: [:create, :destroy]
-    resources :congestions, only: [:create]
+    resources :congestions, only: [:new, :create]
   end
   get "users/profile", to: "users#show", as: "user_profile"
 end

@@ -2,14 +2,17 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_shop
 
+  def new
+    @review = @shop.reviews.new
+  end
+
   def create
     @review = @shop.reviews.new(review_params)
     @review.user = current_user
     if @review.save
       redirect_to shop_path(@shop), notice: "レビューを投稿しました"
     else
-      set_shop_resources
-      render "shops/show", status: :unprocessable_entity
+      render :new, status: :unprocessable_entity
     end
   end
 
