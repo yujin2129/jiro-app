@@ -12,6 +12,10 @@ $jiro-light-yellow: #fff8cc;
 
 body {
   background-color: #ffffff;
+  background-image: image-url('ramen.png');
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  background-position: 0px 75px;
   font-family: 'M PLUS Rounded 1c', sans-serif;
 }
 
