@@ -3,7 +3,7 @@
     <% if params[:keyword].present? %>
       「<%= params[:keyword] %>」の検索結果
     <% else %>
-      人気店舗一覧
+      店舗一覧
     <% end %>
   </h2>
 
@@ -11,6 +11,13 @@
     <%= link_to "新規店舗登録", new_shop_path, class: "btn btn-warning" %>
   <% end %>
 </div>
+
+<%= form_with url: shops_path, method: :get, local: true, class: "d-flex" do %>
+  <%= hidden_field_tag :keyword, params[:keyword] %>
+  <%= select_tag :sort,
+        options_for_select([["新着順", "newest"], ["評価順", "rating"], ["お気に入り順", "favorites"]], params[:sort]),
+        class: "form-select me-2", onchange: "this.form.submit();" %>
+<% end %>
 
 <% if @shops.any? %>
   <div class="row">

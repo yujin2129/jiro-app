@@ -7,9 +7,16 @@ class ShopsController < ApplicationController
     if params[:keyword].present?
       @shops = Shop.where("name LIKE ? OR address LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
     else
-      @shops = Shop.left_joins(:favorites)
-                   .group(:id)
-                   .order("COUNT(favorites.id) DESC")
+      @shops = Shop.all
+    end
+
+    case params[:sort]
+    when "rating"
+      @shops = @shops.order_by_rating
+    when "favorites"
+      @shops = @shops.order_by_favorites
+    else
+      @shops = @shops.order_by_newest
     end
   end
 
