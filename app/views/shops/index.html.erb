@@ -32,7 +32,7 @@
 
   <% if params[:keyword].present? %>
     <span class="text-muted small">
-      <%= pluralize(@shops.size, "件") %>ヒットしました
+      <%= pluralize(@shops.length, "件") %>ヒットしました
     </span>
   <% end %>
 </div>
