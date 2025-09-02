@@ -53,6 +53,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rubocop'
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do
@@ -78,4 +80,3 @@ end
 gem 'bootstrap', '~> 5.3.0'
 gem 'sassc-rails'
 gem 'devise'
-gem 'faker'
