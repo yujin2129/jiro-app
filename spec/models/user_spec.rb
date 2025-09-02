@@ -36,4 +36,21 @@ RSpec.describe User, type: :model do
     it { should have_many(:favorite_shops).through(:favorites).source(:shop) }
     it { should have_many(:congestions).dependent(:nullify) }
   end
+
+  describe "dependent オプション" do
+    it "ユーザーを削除すると関連するレビューも削除される" do
+      user = create(:user)
+      create(:review, user: user)
+
+      expect { user.destroy }.to change { Review.count }.by(-1)
+    end
+
+    it "ユーザーを削除しても関連する混雑情報は削除されず nullify される" do
+      user = create(:user)
+      congestion = create(:congestion, user: user)
+
+      user.destroy
+      expect(congestion.reload.user).to be_nil
+    end
+  end
 end
