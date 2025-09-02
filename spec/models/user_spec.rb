@@ -29,4 +29,11 @@ RSpec.describe User, type: :model do
       expect(user.admin?).to eq false
     end
   end
+
+  describe "アソシエーション" do
+    it { should have_many(:reviews).dependent(:destroy) }
+    it { should have_many(:favorites).dependent(:destroy) }
+    it { should have_many(:favorite_shops).through(:favorites).source(:shop) }
+    it { should have_many(:congestions).dependent(:nullify) }
+  end
 end
