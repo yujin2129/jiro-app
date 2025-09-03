@@ -74,4 +74,39 @@ RSpec.describe Shop, type: :model do
       end
     end
   end
+
+  describe "スコープ" do
+    let!(:shop1) { create(:shop, created_at: 1.day.ago) }
+    let!(:shop2) { create(:shop, created_at: 2.days.ago) }
+    let!(:shop3) { create(:shop, created_at: Time.current) }
+
+    describe ".order_by_newest" do
+      it "新しい順に並ぶこと" do
+        expect(Shop.order_by_newest).to eq [shop3, shop1, shop2]
+      end
+    end
+
+    describe ".order_by_rating" do
+      before do
+        create(:review, shop: shop1, rating: 3)
+        create(:review, shop: shop2, rating: 5)
+        create(:review, shop: shop3, rating: 1)
+      end
+
+      it "平均評価の高い順に並ぶこと" do
+        expect(Shop.order_by_rating).to eq [shop2, shop1, shop3]
+      end
+    end
+
+    describe ".order_by_favorites" do
+      before do
+        create(:favorite, user: create(:user), shop: shop1)
+        2.times { create(:favorite, user: create(:user), shop: shop2) }
+      end
+
+      it "お気に入り数の多い順に並ぶこと" do
+        expect(Shop.order_by_favorites).to eq [shop2, shop1, shop3]
+      end
+    end
+  end
 end
