@@ -3,6 +3,7 @@ class Congestion < ApplicationRecord
   belongs_to :user
 
   validates :visited_on, :visited_time, :level, presence: true
+  validates :visited_time, inclusion: { in: VISITED_TIME_SLOTS }
   validates :level, inclusion: { in: 1..5 }
 
   VISITED_TIME_SLOTS = [
