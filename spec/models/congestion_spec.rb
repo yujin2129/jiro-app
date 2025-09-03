@@ -44,4 +44,9 @@ RSpec.describe Congestion, type: :model do
       expect(congestion).not_to be_valid
     end
   end
+
+  describe "アソシエーション" do
+    it { should belong_to(:user) }
+    it { should belong_to(:shop) }
+  end
 end
