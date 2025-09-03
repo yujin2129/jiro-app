@@ -7,6 +7,16 @@ RSpec.describe Favorite, type: :model do
       expect(favorite).to be_valid
     end
 
+    it "user が必須" do
+      review = build(:review, user: nil)
+      expect(review).not_to be_valid
+    end
+
+    it "shop が必須" do
+      review = build(:review, shop: nil)
+      expect(review).not_to be_valid
+    end
+
     it "同じユーザーが同じ店舗を2回お気に入りできない" do
       user = create(:user)
       shop = create(:shop)
