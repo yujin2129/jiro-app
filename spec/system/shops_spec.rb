@@ -37,7 +37,7 @@ RSpec.describe "Shop管理", type: :system do
       expect(page).to have_content "ログインしました"
 
       visit shop_path(shop)
-      expect(page).not_to have_button "編集"
+      expect(page).not_to have_link "編集"
       expect(page).not_to have_button "削除"
     end
   end
