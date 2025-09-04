@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe "ユーザーの認証機能", type: :system do
-  let(:user) { create(:user, email: "test@example.com", password: "password") }
+  let!(:user) { create(:user, email: "test@example.com", password: "password") }
 
   describe "ユーザー登録" do
     it "成功する場合" do
@@ -33,19 +33,13 @@ RSpec.describe "ユーザーの認証機能", type: :system do
 
   describe "ログイン" do
     it "成功する場合" do
-      user
-      visit new_user_session_path
-
-      fill_in "メール", with: "test@example.com"
-      fill_in "パスワード", with: "password"
-      click_button "ログイン"
+      login(user)
 
       expect(page).to have_content "ログインしました"
       expect(page).to have_content user.name
     end
 
     it "失敗する場合（間違ったパスワード）" do
-      user
       visit new_user_session_path
 
       fill_in "メール", with: "test@example.com"
@@ -59,7 +53,7 @@ RSpec.describe "ユーザーの認証機能", type: :system do
 
   describe "ログアウト" do
     it "成功する" do
-      login_as(user, scope: :user)
+      login(user)
       visit root_path
 
       click_on user.name
