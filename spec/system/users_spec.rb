@@ -8,7 +8,7 @@ RSpec.describe "ユーザーの認証機能", type: :system do
       visit new_user_registration_path
 
       fill_in "名前", with: "テスト太郎"
-      fill_in "メール", with: "newuser@example.com"
+      fill_in "Eメール", with: "newuser@example.com"
       fill_in "パスワード", with: "password"
       fill_in "パスワード（確認用）", with: "password"
       click_button "登録する"
@@ -21,7 +21,7 @@ RSpec.describe "ユーザーの認証機能", type: :system do
       visit new_user_registration_path
 
       fill_in "名前", with: ""
-      fill_in "メール", with: ""
+      fill_in "Eメール", with: ""
       fill_in "パスワード", with: ""
       click_button "登録する"
 
@@ -42,7 +42,7 @@ RSpec.describe "ユーザーの認証機能", type: :system do
     it "失敗する場合（間違ったパスワード）" do
       visit new_user_session_path
 
-      fill_in "メール", with: "test@example.com"
+      fill_in "Eメール", with: "test@example.com"
       fill_in "パスワード", with: "wrongpass"
       click_button "ログイン"
 
