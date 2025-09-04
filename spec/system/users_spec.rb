@@ -54,11 +54,12 @@ RSpec.describe "ユーザーの認証機能", type: :system do
   describe "ログアウト" do
     it "成功する" do
       login(user)
+      expect(page).to have_content "ログインしました"
+      
       visit root_path
-
       click_on user.name
       click_button "ログアウト"
-
+      
       expect(page).to have_content "ログアウトしました"
       expect(page).not_to have_content user.name
     end
