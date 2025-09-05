@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      redirect_to shop_path(@shop), notice: '店舗情報を更新しました。'
+      redirect_to shop_path(@shop), notice: 'レビューを更新しました。'
     else
       render :edit, status: :unprocessable_entity
     end
