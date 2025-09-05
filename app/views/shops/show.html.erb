@@ -75,8 +75,10 @@
           </div>
       <% end %>
 
-      <div id="map" style="height: 400px; width: 100%; margin-bottom: 1rem;"></div>
-      <p id="shop-address" style="display: none;"><%= @shop.address %></p>
+      <% unless Rails.env.test? %>
+        <div id="map" style="height: 400px; width: 100%; margin-bottom: 1rem;"></div>
+        <p id="shop-address" style="display: none;"><%= @shop.address %></p>
+      <% end %>
 
       <div id="favorite_button" class="mt-2">
         <%= render "shops/favorite_button", shop: @shop %>
