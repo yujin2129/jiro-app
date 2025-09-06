@@ -57,5 +57,14 @@ RSpec.describe "Shop管理", type: :system do
       visit shops_path
       expect(page).to have_button "削除"
     end
+
+    it "新規作成が失敗する（名前が空の場合）" do
+      visit new_shop_path
+      fill_in "店舗名", with: ""
+      fill_in "住所", with: "東京都千代田区テスト町1-1-1"
+      click_button "登録する"
+
+      expect(page).to have_content "店舗名を入力してください"
+    end
   end
 end
