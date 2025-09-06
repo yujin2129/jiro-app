@@ -38,6 +38,17 @@ RSpec.describe "Review管理", type: :system do
       expect(page).to have_content "最高の一杯！"
     end
 
+    it "レビュー投稿が失敗する（内容が空の場合）" do
+      visit new_shop_review_path(shop)
+      expect(page).to have_content "レビューを投稿"
+    
+      find("label[for=rating_5]").click
+      fill_in "レビュー内容", with: ""
+      click_button "投稿する"
+    
+      expect(page).to have_content "レビュー内容を入力してください"
+    end
+
     it "レビューを編集できる" do
       visit edit_shop_review_path(shop, review)
       expect(page).to have_content "レビューを編集"
