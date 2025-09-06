@@ -23,19 +23,18 @@ RSpec.describe "Shop管理", type: :system do
   end
 
   context "一般ユーザー" do
-    before { login(user) }
+    before do
+      login(user)
+      expect(page).to have_content "ログインしました"
+    end
 
     it "管理者ページにアクセスできない" do
-      expect(page).to have_content "ログインしました"
-
       visit new_shop_path
       expect(current_path).to eq root_path
       expect(page).to have_content "管理者のみが操作できます"
     end
 
     it "編集・削除リンクが見えない" do
-      expect(page).to have_content "ログインしました"
-
       visit shop_path(shop)
       expect(page).not_to have_link "編集"
       expect(page).not_to have_button "削除"
@@ -43,11 +42,12 @@ RSpec.describe "Shop管理", type: :system do
   end
 
   context "管理者" do
-    before { login(admin) }
+    before do
+      login(admin)
+      expect(page).to have_content "ログインしました"
+    end
 
     it "新規作成・編集・削除できる" do
-      expect(page).to have_content "ログインしました"
-
       visit new_shop_path
       expect(page).to have_content "新規店舗登録"
 
