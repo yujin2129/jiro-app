@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Shop管理", type: :system do
-  let!(:user) { create(:user) }
-  let!(:admin) { create(:user, admin: true) }
+  let(:user) { create(:user) }
+  let(:admin) { create(:user, admin: true) }
   let!(:shop) { create(:shop) }
 
   context "未ログインユーザー" do

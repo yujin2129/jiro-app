@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Review管理", type: :system do
   let(:user) { create(:user) }
-  let!(:other_user) { create(:user) }
+  let(:other_user) { create(:user) }
   let(:shop) { create(:shop) }
   let!(:review) { create(:review, user: user, shop: shop) }
 
