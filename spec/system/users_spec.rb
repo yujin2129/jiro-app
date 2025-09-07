@@ -72,7 +72,7 @@ RSpec.describe "ユーザーの認証機能", type: :system do
     let(:favorite_shop) { create(:shop) }
     let!(:favorite) { create(:favorite, user: user, shop: favorite_shop) }
   
-    before do
+    before do   
       login(user)
       expect(page).to have_content "ログインしました"
       visit user_profile_path(user)
@@ -124,6 +124,33 @@ RSpec.describe "ユーザーの認証機能", type: :system do
   
       expect(page).to have_content "名前を入力してください"
       expect(page).to have_content "Eメールを入力してください"
+    end
+  end
+
+  describe "ヘッダーメニュー" do
+    context "未ログインユーザー" do
+      it "ログイン・アカウント登録リンクが表示される" do
+        visit root_path
+        expect(page).to have_link "ログイン"
+        expect(page).to have_link "登録"
+        expect(page).not_to have_link user.name
+      end
+    end
+  
+    context "ログイン済みユーザー" do
+      before do
+        login(user)
+        expect(page).to have_content "ログインしました"
+      end
+  
+      it "ユーザー名とログアウトリンクが表示される" do
+        visit root_path
+        expect(page).to have_link user.name
+        click_link user.name
+        expect(page).to have_button "ログアウト"
+        expect(page).not_to have_link "ログイン"
+        expect(page).not_to have_link "登録"
+      end
     end
   end
 end
