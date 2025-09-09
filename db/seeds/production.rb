@@ -46,7 +46,7 @@ User.create!(
 )
 
 # 一般ユーザー
-users = 10.times.map do
+users = 5.times.map do
   User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.unique.email,
@@ -65,27 +65,27 @@ shops = 10.times.map do |i|
     menu: "ラーメン 800円、つけ麺 900円、チャーシュー 200円",
     rules: "食券制／並びあり／着席時に食券渡す/着丼前にコール"
   )
-  rand(0..2).times do |j|
+  rand(0..1).times do |j|
     shop.images.attach(io: File.open(shop_images.sample), filename: "shop#{i}_#{j}.jpg")
   end
   shop
 end
 
 # レビュー作成
-20.times do |i|
+10.times do |i|
   review = Review.create!(
     user: users.sample,
     shop: shops.sample,
     rating: rand(1..5),
     content: review_texts.sample
   )
-  rand(0..2).times do |j|
+  rand(0..1).times do |j|
     review.images.attach(io: File.open(review_images.sample), filename: "review#{i}_#{j}.jpg")
   end
 end
 
 # 混雑情報作成
-200.times do
+50.times do
   Congestion.create!(
     user: users.sample,
     shop: shops.sample,
