@@ -1,10 +1,10 @@
 require 'faker'
 
-Review.destroy_all
-Favorite.destroy_all
-Congestion.destroy_all
-User.destroy_all
-Shop.destroy_all
+Review.delete_all
+Favorite.delete_all
+Congestion.delete_all
+User.delete_all
+Shop.delete_all
 
 shop_images = Dir.glob(Rails.root.join("app/assets/images/seeds/shop*.jpg"))
 review_images = Dir.glob(Rails.root.join("app/assets/images/seeds/ramen*.jpg"))
@@ -65,10 +65,6 @@ shops = 10.times.map do |i|
     menu: "ラーメン 800円、つけ麺 900円、チャーシュー 200円",
     rules: "食券制／並びあり／着席時に食券渡す/着丼前にコール"
   )
-  rand(0..1).times do |j|
-    shop.images.attach(io: File.open(shop_images.sample), filename: "shop#{i}_#{j}.jpg")
-  end
-  shop
 end
 
 # レビュー作成
@@ -79,9 +75,6 @@ end
     rating: rand(1..5),
     content: review_texts.sample
   )
-  rand(0..1).times do |j|
-    review.images.attach(io: File.open(review_images.sample), filename: "review#{i}_#{j}.jpg")
-  end
 end
 
 # 混雑情報作成
