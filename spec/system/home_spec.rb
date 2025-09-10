@@ -39,7 +39,7 @@ RSpec.describe "ホーム画面", type: :system do
     it "検索でヒットしない場合" do
       fill_in "店舗名や住所で検索", with: "天下一品"
       click_button "検索"
-  
+
       expect(page).to have_content "該当する店舗が見つかりませんでした"
       expect(page).not_to have_content "ラーメン二郎本店"
       expect(page).not_to have_content "ラーメン山田"

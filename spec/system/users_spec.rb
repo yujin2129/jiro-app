@@ -61,7 +61,7 @@ RSpec.describe "ユーザーの認証機能", type: :system do
       visit root_path
       click_on user.name
       click_button "ログアウト"
-      
+
       expect(page).to have_content "ログアウトしました"
       expect(page).not_to have_content user.name
     end
@@ -71,25 +71,25 @@ RSpec.describe "ユーザーの認証機能", type: :system do
     let!(:review) { create(:review, user: user) }
     let(:favorite_shop) { create(:shop) }
     let!(:favorite) { create(:favorite, user: user, shop: favorite_shop) }
-  
-    before do   
+
+    before do
       login(user)
       expect(page).to have_content "ログインしました"
       visit user_profile_path(user)
     end
-  
+
     it "プロフィール情報が表示される" do
       expect(page).to have_content user.name
       expect(page).to have_content user.email
       expect(page).to have_link "プロフィールを編集"
     end
-  
+
     it "投稿したレビューが表示される" do
       click_button "投稿レビュー"
       expect(page).to have_content "投稿したレビュー"
       expect(page).to have_content review.content
     end
-  
+
     it "お気に入り店舗が表示される" do
       click_button "お気に入り店舗"
       expect(page).to have_content "お気に入り店舗"
@@ -105,23 +105,23 @@ RSpec.describe "ユーザーの認証機能", type: :system do
       click_link "プロフィールを編集"
       expect(page).to have_content "プロフィール編集"
     end
-  
+
     it "名前とメールアドレスを編集できる" do
       fill_in "名前", with: "新しい名前"
       fill_in "Eメール", with: "new_email@example.com"
       fill_in "現在のパスワード", with: user.password
       click_button "更新する"
-  
+
       expect(page).to have_content "アカウント情報を変更しました"
       expect(current_path).to eq root_path
     end
-  
+
     it "必須項目が空だとエラーが表示される" do
       fill_in "名前", with: ""
       fill_in "Eメール", with: ""
       fill_in "現在のパスワード", with: user.password
       click_button "更新する"
-  
+
       expect(page).to have_content "名前を入力してください"
       expect(page).to have_content "Eメールを入力してください"
     end
@@ -136,13 +136,13 @@ RSpec.describe "ユーザーの認証機能", type: :system do
         expect(page).not_to have_link user.name
       end
     end
-  
+
     context "ログイン済みユーザー" do
       before do
         login(user)
         expect(page).to have_content "ログインしました"
       end
-  
+
       it "ユーザー名とログアウトリンクが表示される" do
         visit root_path
         expect(page).to have_link user.name

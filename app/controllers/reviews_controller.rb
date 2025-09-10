@@ -7,6 +7,9 @@ class ReviewsController < ApplicationController
     @review = @shop.reviews.new
   end
 
+  def edit
+  end
+
   def create
     @review = @shop.reviews.new(review_params)
     @review.user = current_user
@@ -15,9 +18,6 @@ class ReviewsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update

@@ -5,7 +5,8 @@ class ShopsController < ApplicationController
 
   def index
     if params[:keyword].present?
-      @shops = Shop.where("name LIKE ? OR address LIKE ?", "%#{params[:keyword]}%", "%#{params[:keyword]}%")
+      @shops = Shop.where("name LIKE ? OR address LIKE ?", "%#{params[:keyword]}%",
+"%#{params[:keyword]}%")
     else
       @shops = Shop.all
     end
@@ -29,6 +30,9 @@ class ShopsController < ApplicationController
     @shop = Shop.new
   end
 
+  def edit
+  end
+
   def create
     @shop = Shop.new(shop_params)
     if @shop.save
@@ -36,9 +40,6 @@ class ShopsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
   end
 
   def update
