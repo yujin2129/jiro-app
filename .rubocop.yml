@@ -1,0 +1,11 @@
+require:
+  - rubocop-airbnb
+
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: disable
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
