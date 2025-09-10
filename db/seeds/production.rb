@@ -72,7 +72,7 @@ shops = 10.times.map do |i|
 end
 
 # レビュー作成
-10.times do |i|
+5.times do |i|
   review = Review.create!(
     user: users.sample,
     shop: shops.sample,
@@ -85,7 +85,7 @@ end
 end
 
 # 混雑情報作成
-50.times do
+20.times do
   Congestion.create!(
     user: users.sample,
     shop: shops.sample,
