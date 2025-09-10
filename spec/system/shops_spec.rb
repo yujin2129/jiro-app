@@ -32,7 +32,7 @@ RSpec.describe "Shop管理", type: :system do
       it "管理者ページにアクセスできない" do
         visit new_shop_path
         expect(current_path).to eq root_path
-        expect(page).to have_content "管理者のみが操作できます"
+        expect(page).to have_content I18n.t('flash.errors.admin_only')
       end
 
       it "編集・削除リンクが見えない" do

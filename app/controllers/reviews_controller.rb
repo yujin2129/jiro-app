@@ -14,7 +14,7 @@ class ReviewsController < ApplicationController
     @review = @shop.reviews.new(review_params)
     @review.user = current_user
     if @review.save
-      redirect_to shop_path(@shop), notice: "レビューを投稿しました"
+      redirect_to shop_path(@shop), notice: I18n.t('flash.review.create')
     else
       render :new, status: :unprocessable_entity
     end
@@ -22,7 +22,7 @@ class ReviewsController < ApplicationController
 
   def update
     if @review.update(review_params)
-      redirect_to shop_path(@shop), notice: 'レビューを更新しました。'
+      redirect_to shop_path(@shop), notice: I18n.t('flash.review.update')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -31,9 +31,9 @@ class ReviewsController < ApplicationController
   def destroy
     if @review.user == current_user
       @review.destroy
-      redirect_to shop_path(@shop), notice: "レビューを削除しました"
+      redirect_to shop_path(@shop), notice: I18n.t('flash.review.destroy')
     else
-      redirect_to shop_path(@shop), alert: "削除できません"
+      redirect_to shop_path(@shop), alert: I18n.t('flash.review.destroy_fail')
     end
   end
 

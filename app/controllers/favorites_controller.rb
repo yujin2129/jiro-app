@@ -6,7 +6,7 @@ class FavoritesController < ApplicationController
     @shop.favorites.create(user: current_user)
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to shop_path(@shop), notice: "お気に入り追加" }
+      format.html { redirect_to shop_path(@shop), notice: I18n.t('flash.favorite.create') }
     end
   end
 
@@ -15,7 +15,7 @@ class FavoritesController < ApplicationController
     favorite.destroy if favorite
     respond_to do |format|
       format.turbo_stream
-      format.html { redirect_to shop_path(@shop), notice: "お気に入り解除" }
+      format.html { redirect_to shop_path(@shop), notice: I18n.t('flash.favorite.destroy') }
     end
   end
 

@@ -31,7 +31,7 @@ RSpec.describe "Review管理", type: :system do
       fill_in "レビュー内容", with: "最高の一杯！"
       click_button "投稿する"
 
-      expect(page).to have_content "レビューを投稿しました"
+      expect(page).to have_content I18n.t('flash.review.create')
       expect(page).to have_content shop.name
 
       click_button "レビュー"
@@ -56,7 +56,7 @@ RSpec.describe "Review管理", type: :system do
       fill_in "レビュー内容", with: "味が濃かった"
       click_button "更新する"
 
-      expect(page).to have_content "レビューを更新しました"
+      expect(page).to have_content I18n.t('flash.review.update')
       expect(page).to have_content shop.name
 
       click_button "レビュー"
@@ -73,7 +73,7 @@ RSpec.describe "Review管理", type: :system do
       accept_confirm do
         click_on "削除"
       end
-      expect(page).to have_content "レビューを削除しました"
+      expect(page).to have_content I18n.t('flash.review.destroy')
       expect(page).not_to have_content review.content
     end
   end

@@ -31,7 +31,7 @@ RSpec.describe "Congestion管理", type: :system do
       select "満席近い", from: "混雑度"
       click_button "投稿する"
 
-      expect(page).to have_content "混雑情報を投稿しました"
+      expect(page).to have_content I18n.t('flash.congestion.create')
       expect(page).to have_content shop.name
 
       click_button "混雑情報"

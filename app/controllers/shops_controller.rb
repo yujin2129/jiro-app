@@ -36,7 +36,7 @@ class ShopsController < ApplicationController
   def create
     @shop = Shop.new(shop_params)
     if @shop.save
-      redirect_to shops_path, notice: '店舗を登録しました'
+      redirect_to shops_path, notice: I18n.t('flash.shop.create')
     else
       render :new, status: :unprocessable_entity
     end
@@ -44,7 +44,7 @@ class ShopsController < ApplicationController
 
   def update
     if @shop.update(shop_params)
-      redirect_to @shop, notice: '店舗情報を更新しました。'
+      redirect_to @shop, notice: I18n.t('flash.shop.update')
     else
       render :edit, status: :unprocessable_entity
     end
@@ -52,7 +52,7 @@ class ShopsController < ApplicationController
 
   def destroy
     @shop.destroy
-    redirect_to shops_path, notice: '店舗を削除しました。'
+    redirect_to shops_path, notice: I18n.t('flash.shop.destroy')
   end
 
   private
@@ -75,7 +75,7 @@ class ShopsController < ApplicationController
 
   def require_admin!
     unless current_user&.admin?
-      redirect_to root_path, alert: "管理者のみが操作できます"
+      redirect_to root_path, alert: I18n.t('flash.errors.admin_only')
     end
   end
 end

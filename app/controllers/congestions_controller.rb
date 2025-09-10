@@ -10,7 +10,7 @@ class CongestionsController < ApplicationController
     @congestion = @shop.congestions.new(congestion_params)
     @congestion.user = current_user
     if @congestion.save
-      redirect_to shop_path(@shop), notice: "混雑情報を投稿しました"
+      redirect_to shop_path(@shop), notice: I18n.t('flash.congestion.create')
     else
       render :new, status: :unprocessable_entity
     end
