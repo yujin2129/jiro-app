@@ -1,6 +1,4 @@
 module CongestionsHelper
-  HIGHLIGHT_COLOR = "#ffd699"
-
   CONGESTION_LEVEL_LABELS = {
     1 => "空席あり",
     2 => "満席近い",
