@@ -48,6 +48,13 @@ jobs:
           gem install bundler
           bundle install --jobs 4 --retry 3
 
+      - name: Wait for Postgres
+        run: |
+          until pg_isready -h $DB_HOST -U $DB_USERNAME; do
+            echo "Waiting for PostgreSQL..."
+            sleep 1
+          done
+
       - name: Set up DB
         run: bundle exec rails db:schema:load
 
