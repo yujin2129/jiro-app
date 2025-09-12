@@ -18,6 +18,10 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV.fetch("DB_USERNAME", ENV["USER"]) %>
+  password: <%= ENV.fetch("DB_PASSWORD", "") %>
+  host: <%= ENV.fetch("DB_HOST", "localhost") %>
+  port: <%= ENV.fetch("DB_PORT", 5432) %>
 
 development:
   <<: *default
@@ -56,10 +60,6 @@ development:
 test:
   <<: *default
   database: jiro_app_test
-  username: postgres
-  password: password
-  host: localhost
-  port: 5432
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -83,6 +83,4 @@ test:
 #
 production:
   <<: *default
-  database: jiro_app_production
-  username: jiro_app
-  password: <%= ENV["JIRO_APP_DATABASE_PASSWORD"] %>
+  url: <%= ENV["DATABASE_URL"] %>
