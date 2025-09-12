@@ -50,6 +50,7 @@ jobs:
 
       - name: Wait for Postgres
         run: |
+          export PGPASSWORD=$DB_PASSWORD
           until pg_isready -h $DB_HOST -U $DB_USERNAME; do
             echo "Waiting for PostgreSQL..."
             sleep 1
