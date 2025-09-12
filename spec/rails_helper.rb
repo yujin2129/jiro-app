@@ -71,6 +71,10 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Warden::Test::Helpers
   config.include SystemHelpers, type: :system
+
+  config.before(:each, type: :system) do
+    driven_by :headless_chrome_ci
+  end
 end
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
