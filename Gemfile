@@ -69,6 +69,7 @@ group :development do
 
   gem 'annotate'
   gem 'dotenv-rails'
+  gem 'rails-erd'
 end
 
 group :test do
