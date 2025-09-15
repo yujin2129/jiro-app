@@ -45,6 +45,21 @@ User.create!(
   admin: true
 )
 
+# ゲストユーザー
+User.create!(
+  name: "ゲストユーザー",
+  email: "guest@example.com",
+  password: "password",
+)
+
+# 管理者ゲストユーザー
+User.create!(
+  name: "管理者ゲストユーザー",
+  email: "guest_admin@example.com",
+  password: "password",
+  admin: true
+)
+
 # 一般ユーザー
 users = 10.times.map do
   User.create!(
