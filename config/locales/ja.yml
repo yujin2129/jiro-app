@@ -1,0 +1,49 @@
+ja:
+  activerecord:
+    models:
+      congestion: "混雑情報"
+      review: "レビュー"
+      shop: "店舗"
+    attributes:
+      congestion:
+        visited_on: "訪問日"
+        visited_time: "訪問時間帯"
+        level: "混雑度"
+        user: "ユーザー"
+        shop: "店舗"
+      review:
+        rating: "評価"
+        content: "レビュー内容"
+        user: "ユーザー"
+        shop: "店舗"
+        images: "画像"
+      shop:
+        name: 店舗名
+        address: 住所
+        opening_hours: 営業時間
+        holiday: 定休日
+        menu: 主なメニュー・価格
+        rules: 店舗ルール
+        images: 画像
+      user:
+        name: 名前
+  time:
+    formats:
+      short: "%Y/%m/%d %H:%M"
+  flash:
+    congestion:
+      create: "混雑情報を投稿しました"
+    favorite:
+      create: "お気に入り追加"
+      destroy: "お気に入り解除"
+    review:
+      create: "レビューを投稿しました"
+      update: "レビューを更新しました。"
+      destroy: "レビューを削除しました"
+      destroy_fail: "削除できません"
+    shop:
+      create: "店舗を登録しました"
+      update: "店舗情報を更新しました。"
+      destroy: "店舗を削除しました"
+    errors:
+      admin_only: "管理者のみが操作できます"

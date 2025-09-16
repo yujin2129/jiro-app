@@ -1,0 +1,33 @@
+<div class="col-md-4 mb-3">
+  <div class="card bg-light text-dark h-100">
+    <% if shop.images.attached? %>
+      <%= image_tag shop.images.first.variant(resize_to_limit: [400, 250]), class: "card-img-top" %>
+    <% end %>
+
+    <div class="card-body">
+      <h5 class="card-title"><%= shop.name %></h5>
+      <p class="card-text"><%= truncate(shop.address, length: 30) %></p>
+
+      <p class="mb-1">
+        <% if user_signed_in? && current_user.favorites.exists?(shop_id: shop.id) %>
+          <span class="badge bg-warning text-dark">お気に入り済み</span>
+        <% end %>
+      </p>
+
+      <p class="mb-2">
+        <%= render "shops/star_rating", shop: shop %>
+      </p>
+
+      <div class="d-flex">
+        <%= link_to "詳細", shop_path(shop), class: "btn btn-sm btn-outline-warning" %>
+  
+        <% if user_signed_in? && current_user.admin? %>
+          <%= link_to "編集", edit_shop_path(shop), class: "btn btn-sm btn-outline-secondary ms-1" %>
+          <%= button_to "削除", shop_path(shop), method: :delete,
+                        data: { turbo_confirm: "本当に削除しますか？" },
+                        class: "btn btn-sm btn-outline-danger ms-1" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

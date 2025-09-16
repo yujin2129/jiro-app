@@ -1,0 +1,16 @@
+require:
+  - rubocop-airbnb
+
+AllCops:
+  TargetRubyVersion: 3.3
+  NewCops: enable
+  Exclude:
+    - 'db/**/*'
+    - 'bin/**/*'
+    - 'node_modules/**/*'
+    - 'vendor/**/*'
+    - 'Gemfile'
+    - 'config/environments/**/*'
+    - 'config/initializers/**/*'
+    - 'spec/rails_helper.rb'
+    - 'spec/spec_helper.rb'

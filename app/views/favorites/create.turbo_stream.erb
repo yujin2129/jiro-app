@@ -1,0 +1,7 @@
+<turbo-stream target="favorite_button" action="replace">
+  <template>
+    <div id="favorite_button">
+      <%= render partial: "shops/favorite_button", formats: [:html], locals: { shop: @shop } %>
+    </div>
+  </template>
+</turbo-stream>
