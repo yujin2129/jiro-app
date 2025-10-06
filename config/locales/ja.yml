@@ -45,5 +45,8 @@ ja:
       create: "店舗を登録しました"
       update: "店舗情報を更新しました。"
       destroy: "店舗を削除しました"
+    user:
+      guest_login: "ゲストユーザーとしてログインしました"
+      guest_admin_login: "管理者ゲストユーザーとしてログインしました"
     errors:
       admin_only: "管理者のみが操作できます"

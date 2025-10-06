@@ -30,6 +30,20 @@
         <% end %>
 
         <%= render "devise/shared/links" %>
+
+        <div class="mt-4">
+          <hr>
+          <h6 class="text-center mb-3">またはゲストとしてログイン</h6>
+          <div class="d-flex flex-column align-items-center gap-2">
+            <%= button_to "ゲストログイン（一般）", users_guest_sign_in_path,
+                          method: :post,
+                          class: "btn btn-outline-primary fw-bold" %>
+
+            <%= button_to "ゲストログイン（管理者）", users_guest_admin_sign_in_path,
+                          method: :post,
+                          class: "btn btn-outline-danger fw-bold" %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
