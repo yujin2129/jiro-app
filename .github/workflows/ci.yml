@@ -77,7 +77,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          gem install bundler
+          gem install bundler --user-install
           bundle install --jobs 4 --retry 3
 
       - name: Deploy to Heroku
