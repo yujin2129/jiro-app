@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
   describe "バリデーション" do
@@ -27,6 +27,32 @@ RSpec.describe User, type: :model do
     it "admin が false の場合は false を返す" do
       user = build(:user, admin: false)
       expect(user.admin?).to eq false
+    end
+  end
+
+  describe ".guest" do
+    it "ゲストユーザーを作成または取得できること" do
+      user = User.guest
+      expect(user).to be_a(User)
+      expect(user.email).to eq("guest@example.com")
+      expect(user.name).to eq("ゲストユーザー")
+      expect(user.admin).to be_falsey
+    end
+
+    it "既に存在する場合は新規作成せずに返すこと" do
+      existing_user = User.guest
+      expect { User.guest }.not_to change(User, :count)
+      expect(User.guest.id).to eq(existing_user.id)
+    end
+  end
+
+  describe ".guest_admin" do
+    it "ゲスト管理者を作成または取得できること" do
+      admin_user = User.guest_admin
+      expect(admin_user).to be_a(User)
+      expect(admin_user.email).to eq("guest_admin@example.com")
+      expect(admin_user.name).to eq("ゲスト管理者")
+      expect(admin_user.admin).to be_truthy
     end
   end
 
