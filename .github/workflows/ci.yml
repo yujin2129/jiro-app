@@ -75,11 +75,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: |
-          gem install bundler --user-install
-          echo "$HOME/.local/share/gem/ruby/3.2.0/bin" >> $GITHUB_PATH
-          bundle install --jobs 4 --retry 3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3.4
+          bundler-cache: true
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.13
