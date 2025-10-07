@@ -82,7 +82,10 @@ jobs:
           bundler-cache: true
 
       - name: Deploy to Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
-          curl https://cli-assets.heroku.com/install.sh | sh
           heroku git:remote -a jiro-map-app
-          git push heroku main --force
+          echo "machine api.heroku.com login ${{ secrets.HEROKU_EMAIL }} password ${{ secrets.HEROKU_API_KEY }}" > ~/.netrc
+          echo "machine git.heroku.com login ${{ secrets.HEROKU_EMAIL }} password ${{ secrets.HEROKU_API_KEY }}" >> ~/.netrc
+          git push https://heroku:${{ secrets.HEROKU_API_KEY }}@git.heroku.com/jiro-map-app.git HEAD:main -f
