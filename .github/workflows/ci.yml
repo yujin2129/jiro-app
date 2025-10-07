@@ -87,3 +87,6 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: "jiro-map-app"
           heroku_email: ${{ secrets.HEROKU_EMAIL }}
+          delay: 20
+        env:
+          HEROKU_DEBUG: 0
